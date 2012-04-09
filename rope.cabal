@@ -1,5 +1,5 @@
 name:           rope
-version:        0.6.1.1
+version:        0.6.2
 license:        BSD3
 license-file:   LICENSE
 author:         Edward A. Kmett
@@ -15,12 +15,12 @@ cabal-version:  >=1.2
 Tested-With:    GHC==6.10.4
 
 library
-  build-depends:    
-    base >= 4 && < 6, 
+  build-depends:
+    base >= 4 && < 6,
     bytestring >= 0.9.1.4 && < 0.10,
     fingertree >= 0.0.1 && < 0.1,
     utf8-string >= 0.3.6 && < 0.4,
-    mtl >= 2.0.1 && < 2.1
+    mtl >= 2.0.1 && < 2.2
 
   exposed-modules:
     Data.Rope
@@ -33,5 +33,5 @@ library
     Data.Rope.Unsafe
     Data.Rope.Body
     Data.Rope.Internal
-    
+
   ghc-options: -Wall

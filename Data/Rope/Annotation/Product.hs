@@ -9,9 +9,7 @@ import Control.Applicative hiding (empty)
 
 import Data.Monoid (mappend)
 import Data.Foldable (Foldable, foldMap)
-import qualified Data.Foldable
 import Data.Traversable (Traversable(traverse))
-
 import Data.Rope.Annotation
 
 infixr 5 :*:

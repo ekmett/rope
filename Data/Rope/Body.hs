@@ -12,7 +12,6 @@ module Data.Rope.Body
 import Prelude hiding (null, length)
 import Data.FingerTree (FingerTree,(<|),(|>),Measured,measure,empty, singleton)
 import Data.Data
-import Data.Typeable
 import Data.Monoid
 import Data.ByteString (ByteString, null, length)
 
