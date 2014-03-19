@@ -1,5 +1,5 @@
 name:           rope
-version:        0.6.2
+version:        0.6.3
 license:        BSD3
 license-file:   LICENSE
 author:         Edward A. Kmett
@@ -17,7 +17,7 @@ Tested-With:    GHC==6.10.4
 library
   build-depends:
     base >= 4 && < 6,
-    bytestring >= 0.9.1.4 && < 0.10,
+    bytestring >= 0.9.1.4 && < 0.10.5.0,
     fingertree >= 0.0.1 && < 0.1,
     utf8-string >= 0.3.6 && < 0.4,
     mtl >= 2.0.1 && < 2.2

@@ -1,7 +1,8 @@
 {-# LANGUAGE TypeOperators, Rank2Types, EmptyDataDecls, 
              MultiParamTypeClasses, FunctionalDependencies, 
              FlexibleContexts, FlexibleInstances, UndecidableInstances,
-             TypeFamilies, IncoherentInstances, OverlappingInstances #-}
+             TypeFamilies, AllowAmbiguousTypes, IncoherentInstances, 
+             OverlappingInstances #-}
 module Data.Rope.Annotated
     ( -- * Annotated 'Rope's 
       Branded(context)   
