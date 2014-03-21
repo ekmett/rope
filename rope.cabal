@@ -1,5 +1,5 @@
 name:           rope
-version:        0.6.3
+version:        0.6.4
 license:        BSD3
 license-file:   LICENSE
 author:         Edward A. Kmett
@@ -13,11 +13,13 @@ copyright:      (c) 2010 Edward A. Kmett
 build-type:     Simple
 cabal-version:  >=1.2
 Tested-With:    GHC==6.10.4
+extra-source-files:
+  CHANGELOG.markdown
 
 library
   build-depends:
     base >= 4 && < 6,
-    bytestring >= 0.9.1.4 && < 0.10.5.0,
+    bytestring >= 0.9.1.4 && < 0.11,
     fingertree >= 0.0.1 && < 0.1,
     utf8-string >= 0.3.6 && < 0.4,
     mtl >= 2.0.1 && < 2.2
