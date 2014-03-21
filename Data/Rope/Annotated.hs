@@ -1,7 +1,13 @@
 {-# LANGUAGE TypeOperators, Rank2Types, EmptyDataDecls, 
              MultiParamTypeClasses, FunctionalDependencies, 
              FlexibleContexts, FlexibleInstances, UndecidableInstances,
-             TypeFamilies, IncoherentInstances, OverlappingInstances #-}
+             TypeFamilies,  IncoherentInstances, 
+             OverlappingInstances, CPP #-}
+
+#if __GLASGOW_HASKELL__ >= 708
+{-# LANGUAGE AllowAmbiguousTypes #-}
+#endif
+
 module Data.Rope.Annotated
     ( -- * Annotated 'Rope's 
       Branded(context)   
