@@ -1,5 +1,5 @@
 name:           rope
-version:        0.6.4
+version:        0.6.4.1
 license:        BSD3
 license-file:   LICENSE
 author:         Edward A. Kmett
@@ -20,7 +20,7 @@ library
   build-depends:
     base >= 4 && < 6,
     bytestring >= 0.9.1.4 && < 0.11,
-    fingertree >= 0.0.1 && < 0.1,
+    fingertree >= 0.0.1,
     utf8-string >= 0.3.6 && < 0.4,
     mtl >= 2.0.1 && < 2.2
 
