@@ -42,7 +42,7 @@ import Data.Typeable (Typeable(..))
 import Data.FingerTree (ViewL(..),ViewR(..),viewl,viewr,(<|),(|>), Measured(..), (><))
 import qualified Data.FingerTree as F (empty, split, null, singleton)
 
-import qualified Data.Foldable as F
+import qualified Data.Foldable as F hiding (null)
 
 import Data.Monoid
 
