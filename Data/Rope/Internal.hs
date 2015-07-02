@@ -40,9 +40,9 @@ import Data.Data (Data(..), DataType, Constr, Fixity(..), mkConstr, mkDataType, 
 import Data.Typeable (Typeable(..))
 
 import Data.FingerTree (ViewL(..),ViewR(..),viewl,viewr,(<|),(|>), Measured(..), (><))
-import qualified Data.FingerTree as F (empty, split, null, singleton)
+import qualified Data.FingerTree as FT (empty, split, null, singleton)
 
-import qualified Data.Foldable as F hiding (null)
+import qualified Data.Foldable as F
 
 import Data.Monoid
 
@@ -95,7 +95,7 @@ class Packable c where
     cons = mappend . pack
 
 empty :: Rope
-empty = Rope F.empty
+empty = Rope FT.empty
 {-# INLINE empty #-}
 
 fromChunks :: [ByteString] -> Rope
@@ -119,12 +119,12 @@ length = measureBody . body
 {-# INLINE length #-}
 
 null :: Rope -> Bool
-null = F.null . body
+null = FT.null . body
 {-# INLINE null #-}
 
 fromByteString :: ByteString -> Rope
 fromByteString b | S.null b = mempty 
-                 | otherwise = Rope (F.singleton (Chunk b))
+                 | otherwise = Rope (FT.singleton (Chunk b))
 {-# INLINE fromByteString #-}
 
 -- NB this requires a strict bytestring reducer, but a lazy bytestring
@@ -142,11 +142,11 @@ fromWords = fromLazyByteString . L.pack
 {-# INLINE fromWords #-}
 
 fromChar :: Char -> Rope
-fromChar c = Rope (F.singleton (Chunk (U.fromString [c])))
+fromChar c = Rope (FT.singleton (Chunk (U.fromString [c])))
 {-# INLINE fromChar #-}
 
 fromWord8 :: Word8 -> Rope
-fromWord8 b = Rope (F.singleton (Chunk (S.singleton b)))
+fromWord8 b = Rope (FT.singleton (Chunk (S.singleton b)))
 {-# INLINE fromWord8 #-}
 
 cons8 :: Word8 -> Rope -> Rope
@@ -185,7 +185,7 @@ splitAt n (Rope f)
         | n >= measureBody f = (Rope f, mempty)
         | otherwise = (Rope (x `snocBody` y'), Rope (y'' `consBody` z))
         where
-            (x,yz) = F.split (> Offset n) f
+            (x,yz) = FT.split (> Offset n) f
             Chunk y :< z = viewl yz
             (y', y'') = S.splitAt (n - measureBody x) y
 
@@ -212,10 +212,10 @@ break8 f r = (Rope t', Rope t'')
     where 
         (t',t'') = break' (body r)
         break' ccs = case viewl ccs of
-           EmptyL -> (F.empty, F.empty)
+           EmptyL -> (FT.empty, FT.empty)
            Chunk c :< cs -> case findIndexOrEnd f c of 
-                0              -> (F.empty, ccs)
-                n | n < S.length c -> (F.singleton (Chunk (S.take n c)), Chunk (S.drop n c) <| cs)
+                0              -> (FT.empty, ccs)
+                n | n < S.length c -> (FT.singleton (Chunk (S.take n c)), Chunk (S.drop n c) <| cs)
                   | otherwise      -> let (cs', cs'') = break' cs
                                       in (Chunk c <| cs', cs'')
 {-# INLINE break8 #-}
@@ -297,9 +297,9 @@ instance UTF8Bytes Rope Int where
         Chunk c :< cs -> Rope (S.unsafeTail c `consBody`cs)
         EmptyL -> errorEmptyList "tail"
     elemIndex b = fmap fromIntegral . L.elemIndex b . L.fromChunks . map unchunk . F.toList . body
-    pack = Rope . foldr (\l r -> Chunk l <| r) F.empty . L.toChunks . L.pack
-    empty = Rope F.empty
-    null = F.null . body
+    pack = Rope . foldr (\l r -> Chunk l <| r) FT.empty . L.toChunks . L.pack
+    empty = Rope FT.empty
+    null = FT.null . body
 
 
 class Unpackable a where
